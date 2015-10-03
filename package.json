@@ -1,0 +1,46 @@
+{
+  "name": "boilreact",
+  "version": "1.0.0",
+  "description": "Simple boilerplate for react apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "BROWSER=PhantomJS SINGLE=true karma start karma.config.js",
+    "test:front": "karma start karma.config.js",
+    "start": "node index.js",
+    "build": "webpack --config webpack.production.config.js && npm run build:html",
+    "build:html": "cp assets/index.html public/index.html",
+    "dev:build": "webpack --config webpack.development.config.js --progress --colors && npm run build:html",
+    "dev:start": "webpack-dev-server --port 8082 --hot --quiet --inline --config webpack.development.config.js"
+  },
+  "author": "Besart Hoxhaj",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.19.0",
+    "hapi": "^8.6.1",
+    "myth-loader": "^1.0.1",
+    "node-sass": "^3.3.3",
+    "react": "^0.13.3",
+    "react-hot-loader": "^1.3.0",
+    "react-router": "1.0.0-beta3",
+    "sass-loader": "^3.0.0",
+    "style-loader": "^0.12.4",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  },
+  "devDependencies": {
+    "expect": "^1.11.1",
+    "function-bind": "^1.0.2",
+    "karma": "^0.13.10",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-webpack": "^1.7.0",
+    "phantomjs": "^1.9.18",
+    "rewire": "^2.3.4",
+    "rewire-webpack": "^1.0.0"
+  }
+}
