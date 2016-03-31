@@ -24,6 +24,7 @@ module.exports = {
       tls: '{}',
       net: '{}',
       console: '{}'
-    }
+    },
+    devtool: 'source-map',
 }
 

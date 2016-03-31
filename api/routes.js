@@ -1,25 +1,24 @@
 'use strict';
 
-var handlers = require('./handlers.js')
+var handlers = require('./handlers.js');
 
 module.exports = [
 	{
 		method: 'GET',
 		path: '/{filepath*}',
 		handler: {
-            directory: {
-                path: 'public'
-            }
-        }
+      directory: {
+        path: 'public'
+      }
+    }
 	},
 	{
 		method: 'GET',
 		path: '/assets/{filepath*}',
 		handler: {
-            directory: {
-                path: 'assets'
-            }
-        }
+      directory: {
+        path: 'assets'
+      }
+    }
 	}
-]
-
+];
