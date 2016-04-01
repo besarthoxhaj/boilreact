@@ -16,8 +16,8 @@ module.exports = function (components) {
         header: false
       }
     },
-    'home': {
-      component: components.home,
+    'overview': {
+      component: components.overview,
       config: {
         sidebar: true,
         header: true

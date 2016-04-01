@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-export default class Home extends Component {
+export default class Overview extends Component {
   render(){
     return (
       <div></div>

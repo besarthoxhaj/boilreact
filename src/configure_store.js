@@ -19,7 +19,7 @@ module.exports = function (apis = require('./apis/index.js')) {
   setTimeout(() => {
     const sessionToken = apis.localStorage.getItem('SESSION_TOKEN');
     if (sessionToken) {
-      store.dispatch(routerActions.navigateTo({name:'home'}));
+      store.dispatch(routerActions.navigateTo({name:'overview'}));
     } else {
       store.dispatch(routerActions.navigateTo({name:'login'}));
     }

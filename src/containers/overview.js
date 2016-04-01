@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import Home from '../components/home.js';
+import Overview from '../components/overview.js';
 import * as NavigationActions from '../actions/router.js';
 import * as LoginActions from '../actions/login.js';
 
@@ -11,12 +11,12 @@ const actionCreators = {
   ...LoginActions
 };
 
-class HomeContainer extends Component {
+class OverviewContainer extends Component {
   render(){
-    return (<Home {...this.props}/>);
+    return (<Overview {...this.props}/>);
   }
 };
 
 const mapStateToProps = state => ({...state});
 
-export default connect(mapStateToProps,actionCreators)(HomeContainer);
+export default connect(mapStateToProps,actionCreators)(OverviewContainer);
