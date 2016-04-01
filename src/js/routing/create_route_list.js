@@ -17,6 +17,6 @@ module.exports = function (components) {
         header: components.empty
       },
       auth: false,
-    }
+    },
   });
 };

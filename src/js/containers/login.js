@@ -2,20 +2,21 @@
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import Sidebar from '../components/sidebar.js';
+import Login from '../components/login.js';
 import * as NavigationActions from '../actions/router.js';
-import _routes from '../routing/routes.js';
+import * as LoginActions from '../actions/login.js';
 
 const actionCreators = {
   ...NavigationActions,
+  ...LoginActions
 };
 
-class SidebarContainer extends Component {
+class LoginContainer extends Component {
   render(){
-    return (<Sidebar {...this.props}/>);
+    return (<Login {...this.props}/>);
   }
-}
+};
 
 const mapStateToProps = state => ({...state});
 
-export default connect(mapStateToProps,actionCreators)(SidebarContainer);
+export default connect(mapStateToProps,actionCreators)(LoginContainer);

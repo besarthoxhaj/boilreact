@@ -12,14 +12,18 @@ const actionCreators = {
 };
 
 class Router extends Component {
-
+  getStyles(){
+    return {
+      order: 2,
+      flex: 3,
+      backgroundColor: '#BCD39B'
+    };
+  }
   render(){
-
     const Component = _routes[this.props.router.route.name].component;
     const fullProps = {...this.props,routeProps:{...this.props.router.route.props}};
-
     return (
-      <div>
+      <div style={this.getStyles()}>
         <Header/>
         <Component {...fullProps}/>
       </div>

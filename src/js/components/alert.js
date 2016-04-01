@@ -28,14 +28,18 @@ export default class Splash extends Component {
     }
   }
   render(){
-    return (
-      <div style={this.getStyle().background}>
-        <div style={this.getStyle().boxContainer}>
-          <div style={this.getStyle().centerBox}>
-            <h1>Splash</h1>
+    if (this.props.alert.isVisible) {    
+      return (
+        <div style={this.getStyle().background}>
+          <div style={this.getStyle().boxContainer}>
+            <div style={this.getStyle().centerBox}>
+              <h1>Alert</h1>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (null);
+    }
   }
 }

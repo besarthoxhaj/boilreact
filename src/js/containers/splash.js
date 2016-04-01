@@ -10,9 +10,8 @@ const actionCreators = {
 };
 
 class SplashContainer extends Component {
-
   render(){
-    return <Splash/>;
+    return (<Splash/>);
   }
 }
 
