@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import Sidebar from '../components/sidebar.js';
+import Sidebar from '../components/sidebar.js'
 import * as NavigationActions from '../actions/router.js';
 import _routes from '../routing/routes.js';
 

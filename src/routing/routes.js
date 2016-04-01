@@ -1,16 +1,16 @@
 'use strict';
 
 import createRouteList from './create_route_list.js';
-// components
 import empty from '../components/empty.js';
-// containers
 import splash from '../containers/splash.js';
 import login from '../containers/login.js';
+import home from '../containers/home.js';
 
 const components = {
   splash,
   empty,
-  login
+  login,
+  home
 };
 
 export default createRouteList(components);

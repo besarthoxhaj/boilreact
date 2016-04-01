@@ -1,7 +1,5 @@
 'use strict';
 
-// require('../styles/main.scss');
-
 import React, { Component } from 'react';
 import ReactDOM, { render as Render } from 'react-dom';
 import { Provider } from 'react-redux';

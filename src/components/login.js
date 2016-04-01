@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Button from './utils/button.js';
 
 export default class Login extends Component {
-  getStyle () {
+  getStyle(){
     return {
       outer: {
         display: 'block',

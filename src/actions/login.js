@@ -6,6 +6,7 @@ import config from '../config.js';
 const { serverRoot } = config;
 import apis from '../apis/index.js';
 import * as alert from './alert.js';
+import * as router from './router.js';
 
 export const updateLoginInput = (field,value) => ({type:types.LOGIN_UPDATE_INPUT,field,value});
 export const resetLogin = () => ({type:types.RESET_LOGIN});
@@ -18,6 +19,9 @@ export const submitLogin = () => (dispatch,getState) => {
 
   if (!email || !password) {
     return dispatch(alert.show('Error','Enter both email and password please'));
+  } else {
+    apis.localStorage.setItem('SESSION_TOKEN','SESSION_TOKEN');
+    dispatch(router.navigateTo({name:'home'}));
   }
 
   // dispatch(modal.show({

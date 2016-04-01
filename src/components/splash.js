@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 export default class Splash extends Component {
-  getStyle () {
+  getStyle(){
     return {
       background: {
         display: 'block', /* Hidden by default */
