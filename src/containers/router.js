@@ -35,7 +35,6 @@ class Router extends Component {
     const route = _routes[this.props.router.route.name];
     const Component = route.component;
     const fullProps = {...this.props,routeProps:{...this.props.router.route.props}};
-    console.log('route',route);
     return (
       <div>
         {route.config.header && (<Header/>)}
