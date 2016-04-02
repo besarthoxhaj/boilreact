@@ -1,4 +1,6 @@
-var webpack = require('webpack');
+'use strict';
+
+const webpack = require('webpack');
 
 module.exports = {
     entry: [
@@ -11,20 +13,12 @@ module.exports = {
     },
     module: {
       loaders: [
-        { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-        { test: /\.scss$/, loader: 'style!css!myth!sass'},
-        { test: /\.json$/, loader: 'json-loader'}
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loaders: ['react-hot', 'babel']
+        },
       ]
-    },
-    plugins: [
-      new webpack.NoErrorsPlugin()
-    ],
-    externals: {
-      fs: '{}',
-      tls: '{}',
-      net: '{}',
-      console: '{}'
     },
     devtool: 'source-map',
 }
-
