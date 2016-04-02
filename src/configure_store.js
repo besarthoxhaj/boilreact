@@ -23,7 +23,7 @@ module.exports = function (apis = require('./apis/index.js')) {
     } else {
       store.dispatch(routerActions.navigateTo({name:'login'}));
     }
-  },2000);
+  },1000);
 
   return store;
 };

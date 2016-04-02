@@ -11,6 +11,11 @@ import * as router from './router.js';
 export const updateLoginInput = (field,value) => ({type:types.LOGIN_UPDATE_INPUT,field,value});
 export const resetLogin = () => ({type:types.RESET_LOGIN});
 
+export const logOutAndClearStorage = () => (dispatch) => {
+  apis.localStorage.clear();
+  dispatch(router.navigateTo({name:'login'}));
+};
+
 export const submitLogin = () => (dispatch,getState) => {
 
   const {
@@ -21,7 +26,7 @@ export const submitLogin = () => (dispatch,getState) => {
     return dispatch(alert.show('Error','Enter both email and password please'));
   } else {
     apis.localStorage.setItem('SESSION_TOKEN','SESSION_TOKEN');
-    dispatch(router.navigateTo({name:'home'}));
+    dispatch(router.navigateTo({name:'overview'}));
   }
 
   // dispatch(modal.show({
