@@ -1,24 +1,21 @@
 'use strict';
 
-var handlers = require('./handlers.js');
+const handlers = require('./handlers.js');
+const path = require('path')
 
 module.exports = [
 	{
 		method: 'GET',
-		path: '/{filepath*}',
-		handler: {
-      directory: {
-        path: 'public'
-      }
+		path: '/',
+		handler: (req, reply) => {
+      reply.file(path.join(__dirname,'..','public','index.html'));
     }
 	},
 	{
 		method: 'GET',
-		path: '/assets/{filepath*}',
-		handler: {
-      directory: {
-        path: 'assets'
-      }
+		path: '/bundle.js',
+    handler: (req, reply) => {
+      reply.file(path.join(__dirname,'..','public','bundle.js'));
     }
 	}
 ];

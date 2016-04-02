@@ -13,6 +13,12 @@ server.connection({
 	}
 });
 
+server.register({
+  register: require('inert')
+}, err => {
+  if (err) { console.log('Failed to load inert') }
+});
+
 server.route(require('./routes.js'));
 
 server.start();
