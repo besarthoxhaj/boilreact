@@ -1,6 +1,9 @@
 /**
  * TODO
  * Explain what's going on here.
+ *
+ * Resources:
+ * - https://webpack.js.org/configuration/dev-server/
  */
 
 var path = require('path');
@@ -75,8 +78,12 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 3000,
-
-    historyApiFallback: true,
+    compress: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /./, to: '/app/index.html' }
+      ]
+    },
     // respond to 404s with index.html
 
     hot: true,
