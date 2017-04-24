@@ -11,13 +11,25 @@ import {
   compose
 } from 'redux';
 
+import { createHashHistory } from 'history';
+
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+
 import rootReducer from './reducers';
 
 export default function configureStore(initialState = {}) {
 
+  const middlewares = [
+    routerMiddleware(createHashHistory())
+  ];
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
   const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(
+      applyMiddleware(...middlewares),
+    )
   );
 
   if (module.hot) {

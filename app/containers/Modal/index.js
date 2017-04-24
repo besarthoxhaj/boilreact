@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Motion, spring } from 'react-motion';
+import { push } from 'react-router-redux';
 
 import * as modalActions from './actions';
 import * as alertActions from '../Alert/actions';
@@ -77,6 +78,7 @@ export const mapDispatchToProps = (
 ) => {
   return {
     closeModal: () => {
+      dispatch(push({}));
       dispatch(modalActions.reset());
     },
     openAlert: () => {

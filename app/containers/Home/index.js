@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import * as modalActions from '../Modal/actions';
 
@@ -22,8 +23,12 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dispatch: dispatch,
     openModal: () => {
+      dispatch(push({
+        pathname: '/',
+        search:'entry=77',
+        query:{entry:'77'},
+      }));
       dispatch(modalActions.show());
     }
   };
