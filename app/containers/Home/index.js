@@ -9,7 +9,14 @@ class Counter extends Component {
     return (
       <div>
         <h1>Home</h1>
-        <button onClick={this.props.openModal}>Open Modal</button>
+        <button
+          data-click="openModal"
+          onClick={this.props.openModal}
+        >Open Modal</button>
+        <button
+          data-click="goToCounter"
+          onClick={this.props.goToCounter}
+        >Counter</button>
       </div>
     );
   };
@@ -21,7 +28,10 @@ export const mapStateToProps = (state) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
+export const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
+  const { dispatch } = dispatchProps;
+
   return {
     openModal: () => {
       dispatch(push({
@@ -30,8 +40,11 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
         query:{entry:'77'},
       }));
       dispatch(modalActions.show());
+    },
+    goToCounter: () => {
+      dispatch(push('/count'));
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(mapStateToProps, undefined, mergeProps)(Counter);

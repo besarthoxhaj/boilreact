@@ -6,13 +6,13 @@ import Router from '../Router';
 import Modal from '../Modal';
 import Alert from '../Alert';
 
-class App extends React.Component {
+export class AppComp extends React.Component {
   render() {
     return (
       <div>
         <Alert />
         <Modal />
-        <Router />
+        <Router history={this.props.history} />
       </div>
     );
   };
@@ -33,4 +33,4 @@ export const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(AppComp);

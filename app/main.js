@@ -1,10 +1,6 @@
-// import 'babel-polyfill';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import App from './containers/App';
-import createStore from './store';
-
-const store = createStore();
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
@@ -15,8 +11,8 @@ const store = createStore();
 export default class Main extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <App />
+      <Provider store={this.props.store}>
+        <App history={this.props.history} />
       </Provider>
     );
   }

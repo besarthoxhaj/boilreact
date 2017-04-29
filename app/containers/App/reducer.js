@@ -1,17 +1,17 @@
 import * as c from './constants';
 
-const initialState = {
+const initialState = {};
 
-};
-
-export default function appReducer(state = initialState, action) {
+export default function appReducer(state = {}, action) {
   switch (action.type) {
-  case 'ONE':
-    return {
-      ...state,
-      one: 'ONE'
-    };
-  default:
-    return state;
+    case 'ONE':
+      return {
+        ...state,
+        one: 'ONE'
+      };
+    default:
+      return {
+        ...state
+      };
   }
 }

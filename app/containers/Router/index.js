@@ -1,30 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router';
-import { createHashHistory } from 'history';
 import { ConnectedRouter } from 'react-router-redux';
 
 import Counter from '../Counter';
 import Home from '../Home';
 
-class App extends React.Component {
-
-  static defaultProps = {
-    style: {
-      position: 'absolute',
-      zIndex: 1,
-    }
-  };
-
+export class RouterComp extends React.Component {
   render() {
     return (
-      <ConnectedRouter history={createHashHistory()}>
-        <div
-          style={{
-            position: 'absolute',
-            zIndex: 1,
-          }}
-        >
+      <ConnectedRouter history={this.props.history}>
+        <div style={{position:'absolute',zIndex:1}}>
           <Route exact path='/' component={Home} />
           <Route exact path='/count' component={Counter} />
         </div>
@@ -48,4 +34,4 @@ export const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(RouterComp);
