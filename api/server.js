@@ -1,7 +1,7 @@
 'use strict';
 
-var Hapi = require('hapi');
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const server = new Hapi.Server();
 
 server.connection({
   port: Number(process.env.PORT) || 9000,
@@ -13,14 +13,15 @@ server.connection({
   }
 });
 
-server.register({
-  register: require('inert')
-}, err => {
-  if (err) { console.log('Failed to load inert') }
+server.register([
+  require('inert'),
+  require('h2o2'),
+], err => {
+  if (err) {
+    console.log('Failed to load inert');
+    throw err;
+  }
+  server.route(require('./routes.js'));
 });
-
-server.route(require('./routes.js'));
-
-server.start();
 
 module.exports = server;

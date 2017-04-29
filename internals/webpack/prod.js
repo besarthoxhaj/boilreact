@@ -1,20 +1,80 @@
-'use strict';
+var path = require('path');
+var webpack = require('webpack');
+var cheerio = require('cheerio');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const webpack = require('webpack');
+var extractSass = new ExtractTextPlugin({
+  filename: 'main.css',
+});
 
 module.exports = {
   entry: [
-    './src/main.js'
+    'whatwg-fetch',
+    './app/index.js'
   ],
+
   output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, '../../build'),
+    publicPath: '/'
   },
+
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/,
-    }],
+    rules: [
+      {
+        test: /\.js?$/,
+        use: [
+          'babel-loader'
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [{
+            loader: 'css-loader'
+          }, {
+            loader: 'sass-loader'
+          }]
+        })
+      },
+    ]
   },
+
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      comments: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
+      },
+    }),
+    extractSass,
+    new HtmlWebpackPlugin({
+      inject: true,
+      templateContent: templateContent(),
+    })
+  ]
 };
+
+function templateContent() {
+
+  const html = [
+    '<!doctype html>',
+    '<html>',
+    '  <head>',
+    '  </head>',
+    '  <body>',
+    '    <div id="root"></div>',
+    '  </body>',
+    '</html>',
+  ].join('\n');
+
+  const doc = cheerio(html);
+  const head = doc.find('head');
+  const body = doc.find('body');
+  return doc.toString();
+}

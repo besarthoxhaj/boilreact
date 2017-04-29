@@ -1,21 +1,26 @@
 'use strict';
 
 const handlers = require('./handlers.js');
-const path = require('path')
+const path = require('path');
+const data = require('../data');
 
 module.exports = [
   {
     method: 'GET',
-    path: '/',
-    handler: (req, reply) => {
-      reply.file(path.join(__dirname,'..','public','index.html'));
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: './build',
+        redirectToSlash: true,
+        index: true
+      }
     }
   },
   {
     method: 'GET',
-    path: '/bundle.js',
-    handler: (req, reply) => {
-      reply.file(path.join(__dirname,'..','public','bundle.js'));
+    path: '/api/data',
+    handler: (req, res) => {
+      return res(data['GET']);
     }
-  }
+  },
 ];

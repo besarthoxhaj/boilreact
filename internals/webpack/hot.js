@@ -48,18 +48,12 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [{
-          loader: "style-loader"
+          loader: 'style-loader'
         }, {
-          loader: "css-loader"
+          loader: 'css-loader'
         }, {
-          loader: "sass-loader",
-          // options: {
-          //   includePaths: ["absolute/path/a", "absolute/path/b"]
-          // }
+          loader: 'sass-loader'
         }]
-
-
-        // 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass',
       },
     ],
   },
@@ -73,6 +67,13 @@ module.exports = {
 
     new webpack.NoEmitOnErrorsPlugin(),
     // do not emit compiled assets that include errors
+
+    new webpack.DefinePlugin({
+      '__TEST__': true,
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
+      },
+    }),
   ],
 
   devServer: {
