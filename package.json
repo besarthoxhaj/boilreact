@@ -11,7 +11,8 @@
     "build": "cross-env NODE_ENV=production webpack -p --config internals/webpack/prod.js",
     "flow": "flow",
     "flow:watch": "flow-watch",
-    "test": "node internals/tests/watch_tests.js"
+    "test": "node internals/tests/watch_tests.js",
+    "gulp": "gulp"
   },
   "author": "Besart Hoxhaj",
   "license": "ISC",
@@ -40,6 +41,9 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "flow-bin": "^0.44.2",
     "flow-watch": "^1.1.1",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-svg-symbols": "^2.0.2",
     "h2o2": "^5.4.0",
     "hapi": "^16.1.1",
     "history": "^4.6.1",
@@ -68,6 +72,7 @@
     "redux-saga": "^0.14.8",
     "reselect": "^3.0.0",
     "sass-loader": "^3.2.0",
+    "sassdoc": "^2.2.2",
     "style-loader": "^0.13.2",
     "sync-flow": "^1.0.0",
     "url-parse": "^1.1.8",
