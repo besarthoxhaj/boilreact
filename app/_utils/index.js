@@ -3,6 +3,7 @@ import { createMemoryHistory } from 'history';
 import createStore from './store';
 import log from './log';
 import domHtml from './dom';
+import snap from './snap';
 
 const start = () => {
 
@@ -27,4 +28,5 @@ export default {
   start,
   createStore,
   log,
+  snap,
 };

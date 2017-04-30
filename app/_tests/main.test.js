@@ -20,6 +20,7 @@ test('APP', t => {
     },
     () => {
       const state = store.getState();
+      utils.snap('001',utils.log(dom.serialize()));
       t.equal(state.alert.isVisible,false,'alert is initially false');
       const btn = document.querySelector('[data-click="openModal"]');
       btn.click();
@@ -32,11 +33,11 @@ test('APP', t => {
     },
     () => {
       const state = store.getState();
-      utils.log(dom.serialize());
+      utils.snap('003',utils.log(dom.serialize()));
       ReactDOM.unmountComponentAtNode(rootElm);
       t.end();
     }
   ];
 
-  syncFlow(exec, t.end, 100);
+  syncFlow(exec, t.end, 200);
 });
