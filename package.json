@@ -9,9 +9,10 @@
     "lint": "eslint src",
     "prebuild": "rimraf build && rimraf build.zip",
     "build": "cross-env NODE_ENV=production webpack -p --config internals/webpack/prod.js",
+    "test": "tape tests/runner.js",
     "flow": "flow",
     "flow:watch": "flow-watch",
-    "test": "node internals/tests/watch_tests.js",
+    "test:watch": "node internals/tests/watch_tests.js",
     "gulp": "gulp"
   },
   "author": "Besart Hoxhaj",

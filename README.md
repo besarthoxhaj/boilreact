@@ -1,5 +1,7 @@
 # Boilreact
 
+[![Build Status](https://travis-ci.org/besarthoxhaj/boilreact.svg?branch=master)](https://travis-ci.org/besarthoxhaj/boilreact)
+
 Simple boilerplate for react app.
 
 ### Production
