@@ -1,10 +1,11 @@
+/* @flow */
+import type { ModalActions } from './types';
 import * as c from './constants';
 
-export const show = config => ({
+export const show = ():ModalActions => ({
   type: c.SHOW_MODAL,
-  config,
 });
 
-export const reset = () => ({
+export const reset = ():ModalActions => ({
   type: c.RESET_MODAL,
 });

@@ -10,7 +10,8 @@
     "prebuild": "rimraf build && rimraf build.zip",
     "build": "cross-env NODE_ENV=production webpack -p --config internals/webpack/prod.js",
     "flow": "flow",
-    "flow:watch": "flow-watch"
+    "flow:watch": "flow-watch",
+    "test": "node internals/tests/watch_tests.js"
   },
   "author": "Besart Hoxhaj",
   "license": "ISC",
