@@ -10,11 +10,11 @@ class Counter extends Component {
       <div>
         <h1>Home</h1>
         <button
-          data-click="openModal"
+          data-home-click="openModal"
           onClick={this.props.openModal}
         >Open Modal</button>
         <button
-          data-click="goToCounter"
+          data-home-click="goToCounter"
           onClick={this.props.goToCounter}
         >Counter</button>
       </div>

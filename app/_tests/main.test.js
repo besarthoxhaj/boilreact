@@ -20,20 +20,38 @@ test('APP', t => {
     },
     () => {
       const state = store.getState();
-      utils.snap('001',utils.log(dom.serialize()));
+      utils.snap({
+        numId:'001',
+        mess:'Inital rendering'
+      },utils.log(dom.serialize()));
       t.equal(state.alert.isVisible,false,'alert is initially false');
-      const btn = document.querySelector('[data-click="openModal"]');
+      const btn = document.querySelector('[data-home-click="openModal"]');
       btn.click();
     },
     () => {
       const state = store.getState();
       t.equal(state.alert.isVisible,false,'alert is true');
-      const btn = document.querySelector('[data-click="goToCounter"]');
+      const btn = document.querySelector('[data-home-click="goToCounter"]');
       btn.click();
     },
     () => {
-      const state = store.getState();
-      utils.snap('003',utils.log(dom.serialize()));
+      t.comment('APP: open alert');
+      utils.snap({
+        numId:'002',
+        mess:'Render after modal open'
+      },utils.log(dom.serialize()));
+      const btn = document.querySelector('[data-modal-click="openAlert"]');
+      btn.click();
+    },
+    () => {
+      t.comment('APP: save image');
+      utils.snap({
+        numId:'003',
+        mess:'Open alert with animation'
+      },utils.log(dom.serialize()));
+    },
+    () => {
+      t.comment('APP: unmount Component');
       ReactDOM.unmountComponentAtNode(rootElm);
       t.end();
     }

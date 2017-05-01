@@ -1,43 +1,130 @@
 import * as R from 'ramda';
 import path from 'path';
-import process from 'process';
 import { readFileSync, writeFileSync } from 'fs';
-import cheerio from 'cheerio';
-import log from './log';
+import { html } from 'js-beautify';
+import phantom from 'phantom';
 
-export default function snapShot(numId, htmlOutput) {
+const SNAP_PATH = `${process.cwd()}/tests/_snapshots`;
 
-  const currentPath = process.cwd();
-  const snapPath = `${currentPath}/tests/_snapshots`;
-  const indexStr = readFileSync(`${snapPath}/index.html`,'utf8');
-  const indexHtml = cheerio(indexStr);
+export default function snapShot(metaObj, htmlOutput) {
 
-  const listItems = R.pipe(
-    (dom) => dom.find('[data-key]'),
-    (elm) => elm.toArray(),
-    R.map(item => item.attribs['data-key'])
-  )(indexHtml);
+  const { numId } = metaObj;
 
-  if(listItems.length === 0) {
-    const html = [
-      '<!doctype html>',
-      '<html>',
-      '  <body>',
-      `    <a data-key="${numId}" href="/test/${numId}.html">${numId}</a>`,
-      '  </body>',
-      '</html>',
-    ].join('\n');
-    writeFileSync(`${snapPath}/index.html`, html, 'utf8');
-    writeFileSync(`${snapPath}/${numId}.html`, htmlOutput, 'utf8');
-    return;
+  const snaps = JSON.parse(
+    readFileSync(`${SNAP_PATH}/index.json`,`utf8`)
+  );
+
+  // START -------------------------------------
+  snaps[numId] = metaObj;
+
+  writeFileSync(
+    `${SNAP_PATH}/html/${numId}.html`,
+    htmlOutput,
+    'utf8'
+  );
+
+  createPreview(numId,htmlOutput);
+
+  // writeFileSync(
+  //   `${SNAP_PATH}/index.json`,
+  //   JSON.stringify(snaps,undefined,2),
+  //   'utf8'
+  // );
+  // END ---------------------------------------
+
+  const data = Object.keys(snaps).map(elm => {
+    return snaps[elm];
+  });
+
+  const domStr = html(renderHtml(data), {
+    'indent_inner_html': true,
+    'indent_size': 2,
+    'unformatted': []
+  });
+
+  writeFileSync(`${SNAP_PATH}/index.html`,domStr,'utf8');
+}
+
+/**
+ * Render HTML as string.
+ * Used to create the `index.html`
+ * file with the lists of tests
+ * and image preview
+ */
+function renderHtml(data) {
+  const React = require('react');
+  const ReactDom = require('react-dom/server');
+
+  class Item extends React.Component {
+    render() {
+      return (
+        <li>
+          <a href={`/test/html/${this.props.numId}.html`}>
+            <div>
+              <img
+                src={`/test/imgs/${this.props.numId}.png`}
+                height={250}
+                width={250}
+              />
+              <span>{this.props.mess}</span>
+            </div>
+          </a>
+        </li>
+      );
+    }
   }
 
-  if(listItems.indexOf(numId) === -1) {
+  class List extends React.Component {
+    render() {
+      const { props } = this;
+      return (
+        <html>
+          <head></head>
+          <body>
+            <div>
+              <ul>
+                {props.list.map((elm,idx) => {
+                  return (
+                    <Item key={`item=${idx}`} {...elm} />
+                  );
+                })}
+              </ul>
+            </div>
+          </body>
+        </html>
+      );
+    }
+  };
 
-    const aTag = `<a data-key="${numId}" href="/test/${numId}.html">${numId}</a>`;
-    const body = indexHtml.find('body');
-    body.append(aTag);
-    writeFileSync(`${snapPath}/index.html`, indexHtml.toString(), 'utf8');
-    writeFileSync(`${snapPath}/${numId}.html`, htmlOutput, 'utf8');
-  }
+  return ReactDom.renderToStaticMarkup(<List list={data} />);
+}
+
+/**
+ * Create image preview of the page.
+ * For more info check:
+ * - http://stackoverflow.com/q/23795913
+ * - https://git.io/v9lgl
+ */
+function createPreview(numId, html) {
+  let _ph, _page, _outObj;
+  phantom.create().then(ph => {
+    _ph = ph;
+    return _ph.createPage();
+  }).then(page => {
+    _page = page;
+
+    _page.property('viewportSize',{
+      width:800,
+      height:600
+    });
+    _page.property('content', html);
+
+    return _page.render(`${SNAP_PATH}/imgs/${numId}.png`);
+  }).then(() => {
+    console.log('# PHANTOM: saved snap');
+    // _page.close();
+    _ph.exit();
+  }).catch(err => {
+    console.log('PHANTOM ERROR:',err);
+  });
 }

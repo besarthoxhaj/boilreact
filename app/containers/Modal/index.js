@@ -42,8 +42,14 @@ class Modal extends Component {
                 }}
               >
                 <h1>Modal!</h1>
-                <button onClick={this.props.closeModal}>Close Modal</button>
-                <button onClick={this.props.openAlert}>Open Alert</button>
+                <button
+                  data-modal-click="closeModal"
+                  onClick={this.props.closeModal}
+                >Close Modal</button>
+                <button
+                  data-modal-click="openAlert"
+                  onClick={this.props.openAlert}
+                >Open Alert</button>
               </div>
             </div>
           );
