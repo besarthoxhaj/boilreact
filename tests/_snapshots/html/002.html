@@ -2,17 +2,27 @@
 <html>
   
   <head>
-    <link href="/main.css" rel="stylesheet">
+    <style>
+      .one{color:red}
+    </style>
   </head>
   
   <body>
+    <div style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="arrow-left" viewBox="0 0 32 32">
+          <path clip-rule="evenodd" d="M11.262,16.714l9.002,8.999  c0.395,0.394,1.035,0.394,1.431,0c0.395-0.394,0.395-1.034,0-1.428L13.407,16l8.287-8.285c0.395-0.394,0.395-1.034,0-1.429  c-0.395-0.394-1.036-0.394-1.431,0l-9.002,8.999C10.872,15.675,10.872,16.325,11.262,16.714z"
+          fillrule="evenodd" id="Chevron_Right"></path>
+        </symbol>
+      </svg>
+    </div>
     <div id="root">
       <div data-reactroot="">
         <div style="position: absolute; top: -300px; width: 300px; height: 300px; background-color: red; left: 35%; z-index: 3; display: none;">
           <h1>Alert</h1>
           <button>Close Alert</button>
         </div>
-        <div style="position: absolute; z-index: 2; display: block; background-color: rgba(0, 0, 0, 0.6751974434071072); bottom: 0px; top: 0px; left: 0px; right: 0px;">
+        <div style="position: absolute; z-index: 2; display: block; background-color: rgba(0, 0, 0, 0.6712367066902273); bottom: 0px; top: 0px; left: 0px; right: 0px;">
           <div style="background-color: white; margin: auto; width: 200px; height: 200px;">
             <h1>Modal!</h1>
             <button data-modal-click="closeModal">Close Modal</button>
