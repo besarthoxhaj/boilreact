@@ -25,11 +25,11 @@ export default function snapShot(metaObj, htmlOutput) {
 
   createPreview(numId,htmlOutput);
 
-  // writeFileSync(
-  //   `${SNAP_PATH}/index.json`,
-  //   JSON.stringify(snaps,undefined,2),
-  //   'utf8'
-  // );
+  writeFileSync(
+    `${SNAP_PATH}/index.json`,
+    JSON.stringify(snaps, undefined, 2),
+    'utf8'
+  );
   // END ---------------------------------------
 
   const data = Object.keys(snaps).map(elm => {
@@ -54,48 +54,7 @@ export default function snapShot(metaObj, htmlOutput) {
 function renderHtml(data) {
   const React = require('react');
   const ReactDom = require('react-dom/server');
-
-  class Item extends React.Component {
-    render() {
-      return (
-        <li>
-          <a href={`/test/html/${this.props.numId}.html`}>
-            <div>
-              <img
-                src={`/test/imgs/${this.props.numId}.png`}
-                height={250}
-                width={250}
-              />
-              <span>{this.props.mess}</span>
-            </div>
-          </a>
-        </li>
-      );
-    }
-  }
-
-  class List extends React.Component {
-    render() {
-      const { props } = this;
-      return (
-        <html>
-          <head></head>
-          <body>
-            <div>
-              <ul>
-                {props.list.map((elm,idx) => {
-                  return (
-                    <Item key={`item=${idx}`} {...elm} />
-                  );
-                })}
-              </ul>
-            </div>
-          </body>
-        </html>
-      );
-    }
-  };
-
+  const List = require('./components').default;
   return ReactDom.renderToStaticMarkup(<List list={data} />);
 }
 

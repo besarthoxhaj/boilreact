@@ -1,8 +1,8 @@
 import test from 'tape';
 import syncFlow from 'sync-flow';
 
+import { btns } from './_helpers';
 import utils from '../_utils';
-import Main from '../main';
 
 test('APP', t => {
 
@@ -13,6 +13,7 @@ test('APP', t => {
   global.navigator = window.navigator
   global.React = require('react');
   global.ReactDOM = require('react-dom');
+  const Main = require('../main').default;
 
   const exec = [
     () => {
@@ -25,14 +26,12 @@ test('APP', t => {
         mess:'Inital rendering'
       },utils.log(dom.serialize()));
       t.equal(state.alert.isVisible,false,'alert is initially false');
-      const btn = document.querySelector('[data-home-click="openModal"]');
-      btn.click();
+      btns.openModal(document).click();
     },
     () => {
       const state = store.getState();
       t.equal(state.alert.isVisible,false,'alert is true');
-      const btn = document.querySelector('[data-home-click="goToCounter"]');
-      btn.click();
+      btns.goToCounter(document).click();
     },
     () => {
       t.comment('APP: open alert');
@@ -40,17 +39,23 @@ test('APP', t => {
         numId:'002',
         mess:'Render after modal open'
       },utils.log(dom.serialize()));
-      const btn = document.querySelector('[data-modal-click="openAlert"]');
-      btn.click();
+      btns.openAlert(document).click();
     },
+    () => { t.comment('...wait') },
     () => {
-      t.comment('APP: save image');
+      t.comment('APP: save image and close alert');
       utils.snap({
         numId:'003',
         mess:'Open alert with animation'
       },utils.log(dom.serialize()));
+      btns.closeAlert(document).click();
     },
+    () => { t.comment('...wait') },
     () => {
+      utils.snap({
+        numId:'004',
+        mess:'Alert closed with animation'
+      },utils.log(dom.serialize()));
       t.comment('APP: unmount Component');
       ReactDOM.unmountComponentAtNode(rootElm);
       t.end();

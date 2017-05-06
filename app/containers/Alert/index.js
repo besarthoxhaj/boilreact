@@ -10,6 +10,7 @@ class Alert extends Component {
     super(props);
     this.getStyle = this.getStyle.bind(this);
     this.getDisplay = this.getDisplay.bind(this);
+    this.getAlertStyle = this.getAlertStyle.bind(this);
   };
 
   render() {
@@ -20,20 +21,12 @@ class Alert extends Component {
       >
         {({x, y}) => {
           return (
-            <div
-              style={{
-                position: 'absolute',
-                top: y,
-                width: 300,
-                height: 300,
-                backgroundColor: 'red',
-                left: '35%',
-                zIndex: 3,
-                display: this.getDisplay(x)
-              }}
-            >
+            <div style={this.getAlertStyle(x,y)}>
               <h1>Alert</h1>
-              <button onClick={this.props.closeAlert}>Close Alert</button>
+              <button
+                data-alert-click="closeAlert"
+                onClick={this.props.closeAlert}
+              >Close Alert</button>
             </div>
           );
         }}
@@ -51,6 +44,19 @@ class Alert extends Component {
   getDisplay(x) {
     const { isVisible } = this.props;
     return (!isVisible && x < 0.25) ? 'none' : 'block';
+  };
+
+  getAlertStyle(x,y) {
+    return {
+      position: 'absolute',
+      top: y,
+      width: 300,
+      height: 300,
+      backgroundColor: 'red',
+      left: '35%',
+      zIndex: 3,
+      display: this.getDisplay(x)
+    };
   };
 }
 

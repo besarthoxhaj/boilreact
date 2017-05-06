@@ -9,8 +9,11 @@ const notifier = require('node-notifier');
 
 nodemon({
   script: 'tests/runner.js',
+  ignore: 'tests/_snapshots/*',
 }).on('start', function () {
   // process started correctly
+}).on('restart', function() {
+  // process restarted
 }).on('crash', function () {
   notifier.notify('Tests failed');
 }).on('exit', function() {
