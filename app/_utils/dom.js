@@ -1,17 +1,18 @@
 import cheerio from 'cheerio';
 import { readFileSync } from 'fs';
 import path from 'path';
+import nodeSass from 'node-sass';
 
 const PATH = process.cwd();
 const svgSymbols = readFileSync(`${PATH}/assets/svg-symbols.html`,`utf8`);
-const compiledCss = readFileSync(`${PATH}/build/main.css`,`utf8`);
+const { css } = nodeSass.renderSync({file:`${PATH}/sass/entry.scss`});
 
 export default `
 <!DOCTYPE html>
 <html>
   <head>
     <style>
-      ${compiledCss}
+      ${css}
     </style>
   </head>
   <body>
