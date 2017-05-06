@@ -3,9 +3,13 @@
 
 [ignore]
 .*/build/.*
+
 # Tries to do `import * as Promise from ...` This is illegal, Promise is native.
 .*/node_modules/react-side-effect/node_modules/*
+
+# Local modules who had some conflicts with Flow
 .*/node_modules/nock/*
+.*/node_modules/config-chain/*
 
 [options]
 # Provides an escape hatch to suppress flow type errors.
