@@ -76,14 +76,27 @@ function createPreview(numId, html) {
       width:800,
       height:600
     });
-    _page.property('content', html);
+    _page.property('content',html);
 
-    return _page.render(`${SNAP_PATH}/imgs/${numId}.png`);
+    // TODO: fix timing issues check
+    // if page has an `onLoad` so
+    // to avoid waiting for 1sec
+    return _waitPromise(1000);
   }).then(() => {
-    console.log('# PHANTOM: saved snap');
+    return _page.render(`${SNAP_PATH}/imgs/${numId}.png`);
+  }).then((...args) => {
+    console.log(`# PHANTOM: saved snap --> ${numId}`);
     // _page.close();
     _ph.exit();
   }).catch(err => {
     console.log('PHANTOM ERROR:',err);
+  });
+}
+
+function _waitPromise(time) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    },time);
   });
 }
