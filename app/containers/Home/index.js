@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { createStructuredSelector as createSelector } from 'reselect';
 
 import * as modalActions from '../Modal/actions';
 
-class Counter extends Component {
+class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { searchValue: '' };
+    this.updateSearch = this.updateSearch.bind(this);
+    this.sendSearch = this.sendSearch.bind(this);
+  };
+
   render() {
     return (
       <div>
@@ -17,16 +26,30 @@ class Counter extends Component {
           data-home-click="goToCounter"
           onClick={this.props.goToCounter}
         >Counter</button>
+        <input
+          data-search-input="changeText"
+          type='text'
+          onChange={this.updateSearch}
+          onKeyDown={this.sendSearch}
+          value={this.state.searchValue}
+        />
       </div>
     );
   };
+
+  updateSearch({target:{value}}) {
+    this.setState({searchValue:value});
+  };
+
+  sendSearch(evt) {
+    if(evt['key'] === 'Enter') {
+      evt.preventDefault();
+      this.props.sendSearch(this.state['searchValue']);
+    }
+  };
 }
 
-export const mapStateToProps = (state) => {
-  return {
-    ...state
-  };
-};
+export const mapStateToProps = createSelector({});
 
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
@@ -43,8 +66,15 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
     goToCounter: () => {
       dispatch(push('/count'));
-    }
+    },
+    sendSearch(search:string) {
+      console.log('sendSearch',search);
+    },
   };
 };
 
-export default connect(mapStateToProps, undefined, mergeProps)(Counter);
+export default connect(
+  mapStateToProps,
+  undefined,
+  mergeProps
+)(Home);

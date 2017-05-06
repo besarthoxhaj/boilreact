@@ -27,7 +27,7 @@ require(`./_bootstrap`);
 
 /* INTEGRATION */
 require(`${BASE_PATH}/_tests/main.test.js`);
-// require(`${BASE_PATH}/containers/Home/_tests/index.test.js`);
+require(`${BASE_PATH}/_tests/home.test.js`);
 
 /* UNIT */
 require(`${BASE_PATH}/utils/_tests/index.test.js`);
