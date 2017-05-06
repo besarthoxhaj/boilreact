@@ -74,3 +74,39 @@ export const parseUrl = (url) => {
     query,
   };
 }
+
+/**
+ * Create a `randomString`
+ */
+export const randomString = (length) => {
+  const chars = '01236789abcdefghijkltuvwxyzABNOPQRWXYZ';
+  let result = '';
+  for (let i = length; i > 0; --i) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return result;
+};
+
+/**
+ * Just a list of random colors
+ * to use as placeholder for
+ * development
+ */
+export const getColor = () => {
+
+  const COLORS = [
+    '#15B371',
+    '#DB3737',
+    '#FF7373',
+    '#F29D49',
+    '#669EFF',
+    '#29A634',
+    '#C274C2',
+    '#30404D',
+    '#9E2B0E',
+    '#A82A2A',
+    '#10161A',
+  ];
+
+  return COLORS[Math.floor(Math.random() * COLORS.length)];
+};
