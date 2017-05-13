@@ -33,6 +33,7 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
+    "@bes/snap": "^1.0.1",
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.23.0",
     "css-loader": "^0.23.1",

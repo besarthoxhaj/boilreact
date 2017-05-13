@@ -15,7 +15,7 @@ test('HOME', t => {
   global.ReactDOM = require('react-dom');
   const Main = require('../main').default;
 
-  const exec = [
+  syncFlow([
     () => {
       ReactDOM.render(<Main store={store} history={history} />, rootElm);
     },
@@ -31,15 +31,14 @@ test('HOME', t => {
     () => {
       utils.snap({
         numId:'005',
-        mess:'Enter input text'
-      },utils.log(dom.serialize()));
+        mess:'Enter input text',
+        body:dom.serialize(),
+      });
     },
     () => {
       t.comment('APP: unmount Component');
       ReactDOM.unmountComponentAtNode(rootElm);
       t.end();
     }
-  ];
-
-  syncFlow(exec, t.end, 200);
+  ],t.end,100);
 });

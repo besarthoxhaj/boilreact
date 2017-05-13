@@ -1,9 +1,9 @@
 import jsdom, { JSDOM, VirtualConsole } from 'jsdom';
 import { createMemoryHistory } from 'history';
+import takeSnap from '@bes/snap';
 import createStore from './store';
 import log from './log';
 import domHtml from './dom';
-import snap from './snap';
 
 const start = () => {
 
@@ -23,6 +23,11 @@ const start = () => {
     rootElm,
   };
 };
+
+const snap = takeSnap({
+  outputDir: `${process.cwd()}/tests/_snapshots/html`,
+  outputFile: `${process.cwd()}/tests/_snapshots/index.json`,
+});
 
 export default {
   start,
