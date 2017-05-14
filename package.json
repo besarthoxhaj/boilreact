@@ -6,14 +6,13 @@
   "scripts": {
     "start": "node api/index.js",
     "dev": "cross-env NODE_ENV=test webpack-dev-server --config internals/webpack/hot.js",
-    "lint": "eslint src",
-    "prebuild": "rimraf build && rimraf build.zip",
+    "prebuild": "npm run gulp -- prod",
     "build": "cross-env NODE_ENV=production webpack -p --config internals/webpack/prod.js",
     "test": "tape tests/runner.js",
     "flow": "flow",
     "flow:watch": "flow-watch",
     "test:watch": "node internals/tests/watch_tests.js",
-    "gulp": "gulp"
+    "gulp": "gulp --gulpfile ./internals/gulp/index.js"
   },
   "author": "Besart Hoxhaj",
   "license": "ISC",
@@ -45,7 +44,10 @@
     "flow-bin": "^0.44.2",
     "flow-watch": "^1.1.1",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.2.0",
     "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-svg-symbols": "^2.0.2",
     "h2o2": "^5.4.0",
     "hapi": "^16.1.1",
