@@ -2,12 +2,13 @@
  * Create Sass documentation
  */
 
+const { merge } = require('ramda');
 const gulp = require('gulp');
 const sassdoc = require('sassdoc');
 
 module.exports = (conf) => {
 
-  const opts = {
+  const opts = merge({
     dest: 'sass-docs',
     verbose: true,
     description: 'Boilreact',
@@ -16,7 +17,7 @@ module.exports = (conf) => {
       alias: false,
       watermark: false
     }
-  };
+  },conf);
 
   return () => {
     return gulp.src(conf.source)

@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom';
 import { createHashHistory } from 'history';
 
 import App from './main';
-import styles from '../sass/entry.scss';
 import createStore from './store';
 import analyticsSagas from './containers/Analytics/sagas';
 

@@ -1,32 +1,30 @@
 const R = require('ramda');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const path = require('path');
 const html = require('html');
 
 module.exports = (config) => {
 
   const opts = R.merge({
-    outputFile: 'app/index.html',
-    inputFile: 'assets/svg-symbols.html',
+    src: './assets/svg-symbols.html',
+    dest: './app/index.html',
   }, config);
 
   return () => {
 
-    const outputFile = require('fs').readFileSync(
-      path.resolve(process.cwd(), opts.outputFile)
-    ).toString();
-
-    const inputFile = require('fs').readFileSync(
-      path.resolve(process.cwd(), opts.inputFile)
-    ).toString();
+    const outputFile = require('fs').readFileSync(opts.dest).toString();
+    const inputFile = require('fs').readFileSync(opts.src).toString();
 
     const doc = cheerio(outputFile);
     const body = doc.find('body');
-    body.prepend(`<div class="[ u-hidden ]">${inputFile}</div>`);
+
+    // check if the `data-svg-symbols` is
+    // already present
+    body.find('[data-svg-symbols]').remove();
+    body.prepend(`<div data-svg-symbols class="[ u-hidden ]">${inputFile}</div>`);
 
     fs.writeFileSync(
-      opts.outputFile,
+      opts.dest,
       html.prettyPrint(doc.toString(),{indent_size:2}),
       'utf8'
     );

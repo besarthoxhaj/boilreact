@@ -1,12 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var cheerio = require('cheerio');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-var extractSass = new ExtractTextPlugin({
-  filename: 'main.css',
-});
 
 module.exports = {
   entry: [
@@ -29,16 +24,6 @@ module.exports = {
         ],
         exclude: /node_modules/
       },
-      {
-        test: /\.scss$/,
-        use: extractSass.extract({
-          use: [{
-            loader: 'css-loader'
-          }, {
-            loader: 'sass-loader'
-          }]
-        })
-      },
     ]
   },
 
@@ -48,11 +33,11 @@ module.exports = {
       comments: false
     }),
     new webpack.DefinePlugin({
+      '_TEST_': false,
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
+        NODE_ENV: JSON.stringify('production')
       },
     }),
-    extractSass,
     new HtmlWebpackPlugin({
       inject: true,
       templateContent: templateContent(),
@@ -62,10 +47,15 @@ module.exports = {
 
 function templateContent() {
 
+  const svgSymbols = require('fs').readFileSync(
+    require('path').resolve(process.cwd(), 'assets/svg-symbols.html')
+  ).toString();
+
   const html = [
     '<!doctype html>',
     '<html>',
     '  <head>',
+    '    <link href="/main.css" rel="stylesheet">',
     '  </head>',
     '  <body>',
     '    <div id="root"></div>',
@@ -76,5 +66,6 @@ function templateContent() {
   const doc = cheerio(html);
   const head = doc.find('head');
   const body = doc.find('body');
+  body.prepend(`<div class="[ u-hidden ]">${svgSymbols}</div>`);
   return doc.toString();
 }
