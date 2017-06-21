@@ -1,6 +1,6 @@
 {
   "name": "boilreact",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "My own opinionated boilerplate for react apps",
   "main": "index.js",
   "scripts": {
