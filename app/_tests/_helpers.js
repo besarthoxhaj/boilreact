@@ -1,4 +1,7 @@
 export const btns = {
+  cleanCookies: () => {
+    console.log('CLEAN COOKIES');
+  },
   openModal: (doc) => {
     return doc.querySelector(`[data-home-click="openModal"]`);
   },

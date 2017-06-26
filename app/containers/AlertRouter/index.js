@@ -4,7 +4,7 @@ import { Motion, spring } from 'react-motion';
 
 import * as alertActions from './actions';
 
-class Alert extends Component {
+class AlertRouter extends Component {
 
   constructor(props) {
     super(props);
@@ -64,15 +64,21 @@ export const mapStateToProps = (
   state
 ) => {
   return {
-    isVisible: state.alert.isVisible
+    isVisible: state.alertRouter.isVisible
   };
 };
 
-export const mapDispatchToProps = (
-  dispatch,
+export const mergeProps = (
+  stateProps,
+  dispatchProps,
   ownProps
 ) => {
+
+  const { dispatch } = dispatchProps;
+
   return {
+    ...stateProps,
+    ...ownProps,
     closeAlert: () => {
       dispatch(alertActions.reset());
     }
@@ -81,5 +87,6 @@ export const mapDispatchToProps = (
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Alert);
+  undefined,
+  mergeProps
+)(AlertRouter);

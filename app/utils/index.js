@@ -2,6 +2,7 @@ import * as R from 'ramda';
 import queryString from 'query-string';
 
 import * as U from './helpers';
+import config from '../config';
 
 /**
  * Substitutes
@@ -109,4 +110,81 @@ export const getColor = () => {
   ];
 
   return COLORS[Math.floor(Math.random() * COLORS.length)];
+};
+
+/**
+ * Creates a wrapper around the npm history api.
+ * Testing is the main reason. When running the
+ * tests with JSDOM we are in a node enviorment.
+ * This means there is no browser history api
+ * available. Fortunatley the npm module 'history'
+ * provides a `createMemoryHistory()` function.
+ * This create an history instance with entries
+ * visited.
+ *
+ * Resources:
+ * - https://github.com/ReactTraining/history/issues/441
+ *
+ */
+export const createHistory = (initUrl) => {
+
+  if(global._TEST_) {
+    var history = require('history').createMemoryHistory();
+  } else {
+    var history = require('history').createHashHistory();
+  }
+
+  history.listen((payload, action) => {
+    history.entries.push(payload);
+  });
+
+  if(history.entries === undefined) {
+    history.entries = [];
+    const currentLoc = parseUrl(initUrl);
+    history.entries.push(currentLoc);
+  }
+
+  if(global._TEST_) {
+    history.push(initUrl);
+    delete history.entries;
+    history.entries = [];
+    const currentLoc = parseUrl(`${config('api')}/#${initUrl}`);
+    history.entries.push(currentLoc);
+  }
+
+  return history;
+};
+
+/**
+ * Get previous history state. This is strictly
+ * related to the function above `createHistory`.
+ */
+export const getPrev = (history):{
+  pathname: string,
+  search: string,
+  hash: string,
+  key: string,
+} => {
+
+  // BUG: during the tests for some reason
+  // past entries are duplicated. This filter
+  // will ensure that only unique keys are
+  // present. To make it more weird it
+  // doesn't happend in production
+  if(history.entries && global._TEST_) {
+    history.entries = R.uniqWith(
+      (a,b) => a['key'] === b['key'],
+      history.entries
+    );
+  }
+
+  const len = (history.entries || {}).length;
+
+  if(len === 1 || len === 0 || len === undefined) {
+    return {};
+  }
+
+  const prev = history.entries.slice(len-2,len-1);
+  const clone = JSON.parse(JSON.stringify(prev[0]));
+  return clone;
 };

@@ -4,9 +4,9 @@ import { Motion, spring } from 'react-motion';
 import { push } from 'react-router-redux';
 
 import * as modalActions from './actions';
-import * as alertActions from '../Alert/actions';
+import * as alertActions from '../AlertRouter/actions';
 
-class Modal extends Component {
+class ModalRouter extends Component {
 
   constructor(props) {
     super(props);
@@ -74,15 +74,21 @@ export const mapStateToProps = (
   state
 ) => {
   return {
-    isVisible: state.modal.isVisible
+    isVisible: state.modalRouter.isVisible
   };
 };
 
-export const mapDispatchToProps = (
-  dispatch,
+export const mergeProps = (
+  stateProps,
+  dispatchProps,
   ownProps
 ) => {
+
+  const { dispatch } = dispatchProps;
+
   return {
+    ...stateProps,
+    ...ownProps,
     closeModal: () => {
       dispatch(push({}));
       dispatch(modalActions.reset());
@@ -95,5 +101,6 @@ export const mapDispatchToProps = (
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Modal);
+  undefined,
+  mergeProps
+)(ModalRouter);

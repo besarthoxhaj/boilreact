@@ -7,7 +7,7 @@ import Counter from '../Counter';
 import Home from '../Home';
 import NotFound from '../NotFound';
 
-export class RouterComp extends React.Component {
+export class PageRouter extends React.Component {
   render() {
     return (
       <ConnectedRouter history={this.props.history}>
@@ -23,19 +23,25 @@ export class RouterComp extends React.Component {
   };
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    dispatch: dispatch,
-  };
-};
-
 export const mapStateToProps = (state) => {
   return {
     ...state
   };
 };
 
+export const mergeProps = (
+  stateProps,
+  dispatchProps,
+  ownProps
+) => {
+  return {
+    ...stateProps,
+    ...ownProps,
+  };
+};
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(RouterComp);
+  undefined,
+  mergeProps
+)(PageRouter);

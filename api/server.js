@@ -4,7 +4,7 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 
 server.connection({
-  port: Number(process.env.PORT) || 9000,
+  port: Number(process.env.PORT) || 9010,
   routes: {
     cors: {
       origin: ['*'],

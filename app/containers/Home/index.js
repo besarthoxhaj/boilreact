@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { createStructuredSelector as createSelector } from 'reselect';
 
-import * as modalActions from '../Modal/actions';
+import * as modalActions from '../ModalRouter/actions';
 
 class Home extends Component {
 

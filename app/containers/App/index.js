@@ -3,19 +3,21 @@ import type { Children } from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../Header';
-import Router from '../Router';
-import Modal from '../Modal';
-import Alert from '../Alert';
+import Footer from '../Footer';
+import PageRouter from '../PageRouter';
+import ModalRouter from '../ModalRouter';
+import AlertRouter from '../AlertRouter';
 
 export class AppComp extends React.Component {
   render() {
     return (
       <div>
-        <Alert />
-        <Modal />
+        <AlertRouter />
+        <ModalRouter />
         <div style={this.getStyle()}>
           <Header />
-          <Router history={this.props.history} />
+          <PageRouter history={this.props.history} />
+          <Footer />
         </div>
       </div>
     );
@@ -33,19 +35,25 @@ export class AppComp extends React.Component {
   };
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    dispatch: dispatch,
-  };
-};
-
 export const mapStateToProps = (state) => {
   return {
     ...state
   };
 };
 
+export const mergeProps = (
+  stateProps,
+  dispatchProps,
+  ownProps
+) => {
+  return {
+    ...stateProps,
+    ...ownProps,
+  };
+};
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  undefined,
+  mergeProps
 )(AppComp);
