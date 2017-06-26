@@ -12,7 +12,9 @@
     "flow": "flow",
     "flow:watch": "flow-watch",
     "test:watch": "node internals/tests/watch_tests.js",
-    "gulp": "gulp --gulpfile ./internals/gulp/index.js"
+    "gulp": "gulp --gulpfile ./internals/gulp/index.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "Besart Hoxhaj",
   "license": "ISC",
@@ -29,7 +31,8 @@
     "rimraf": "^2.6.0",
     "tape": "^4.6.3",
     "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-server": "^2.2.0",
+    "@storybook/react": "^3.1.6"
   },
   "dependencies": {
     "@bes/snap": "^1.0.1",
