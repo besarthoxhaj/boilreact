@@ -82,7 +82,6 @@
     "redux-saga": "^0.15.3",
     "reselect": "^3.0.0",
     "sass-loader": "^6.0.6",
-    "sassdoc": "^2.2.2",
     "style-loader": "^0.18.2",
     "sync-flow": "^1.0.0",
     "url-parse": "^1.1.8",

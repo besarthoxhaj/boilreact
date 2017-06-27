@@ -5,7 +5,6 @@
 const gulp = require('gulp');
 const path = require('path');
 
-const SassDocs = require('./sass-docs');
 const SvgSymbols = require('./svg-symbols');
 const UpdateHtml = require('./update-html');
 const CopyImgs = require('./copy-imgs');
@@ -25,11 +24,9 @@ const paths = {
   buildCss: `${BASE}/build/main.css`,
   html: `${BASE}/app/index.html`,
   build: `${BASE}/build`,
-  docs: `${BASE}/sass-docs`,
   assets: `${BASE}/assets/`,
 };
 
-gulp.task('sass-docs', SassDocs({source:paths.sass,dest:paths.docs}));
 gulp.task('svg-symbols', SvgSymbols({src:paths.svgs,dest:paths.assets}));
 gulp.task('update-html', ['svg-symbols'], UpdateHtml({src:paths.symbols,dest:paths.html}));
 gulp.task('copy-imgs', CopyImgs({src:paths.imgs,dest:paths.imgsDest}));
@@ -38,14 +35,12 @@ gulp.task('autoprefixer', ['style'], Autoprefixer({src:paths.buildCss,dest:paths
 gulp.task('minify-css', ['autoprefixer'], MinifyCss({src:paths.buildCss,dest:paths.build}));
 
 gulp.task('watch', () => {
-  gulp.watch(paths.sass, ['sass-docs']);
   gulp.watch(paths.symbols, ['update-html']);
   gulp.watch(paths.imgs, ['copy-imgs']);
   gulp.watch(paths.sass, ['autoprefixer']);
 });
 
 gulp.task('default', [
-  'sass-docs',
   'svg-symbols',
   'update-html',
   'copy-imgs',
