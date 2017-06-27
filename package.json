@@ -30,7 +30,7 @@
     "react-test-renderer": "^15.5.4",
     "rimraf": "^2.6.0",
     "tape": "^4.6.3",
-    "webpack": "^3.0.0",
+    "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0",
     "@storybook/react": "^3.1.6"
   },
