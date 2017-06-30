@@ -22,6 +22,17 @@ server.register([
     console.log('Failed to load inert');
     throw err;
   }
+
+  server.auth.strategy('simple', 'basic', {
+    validateFunc: (req, username, password, callback) => {
+      if(username === 'canneslion' && password === 'correct') {
+        callback(undefined,true,{id:'001',name:'Bes'});
+      } else {
+        callback(undefined,false);
+      }
+    }
+  });
+
   server.route(require('./routes.js'));
 });
 
