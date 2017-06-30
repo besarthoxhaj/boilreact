@@ -16,6 +16,7 @@ server.connection({
 server.register([
   require('inert'),
   require('h2o2'),
+  require('hapi-auth-basic'),
 ], err => {
   if (err) {
     console.log('Failed to load inert');

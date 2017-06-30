@@ -8,6 +8,9 @@ module.exports = [
   {
     method: 'GET',
     path: '/{param*}',
+    config: {
+      auth: 'simple'
+    },
     handler: {
       directory: {
         path: './build',
@@ -19,6 +22,9 @@ module.exports = [
   {
     method: 'GET',
     path: '/test/{param*}',
+    config: {
+      auth: 'simple'
+    },
     handler: {
       directory: {
         path: './tests/_snapshots',
@@ -30,6 +36,9 @@ module.exports = [
   {
     method: 'GET',
     path: '/api/data',
+    config: {
+      auth: 'simple'
+    },
     handler: (req, res) => {
       return res(data['GET']);
     }
