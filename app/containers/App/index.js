@@ -7,8 +7,14 @@ import Footer from '../Footer';
 import PageRouter from '../PageRouter';
 import ModalRouter from '../ModalRouter';
 import AlertRouter from '../AlertRouter';
+import config from '../../config';
 
 export class AppComp extends React.Component {
+
+  componentDidMount() {
+    console.log(`@${config('version')}`);
+  };
+
   render() {
     return (
       <div>
