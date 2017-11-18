@@ -45,14 +45,13 @@ const startDom = () => {
     }
   });
 
-  return {
-    dom,
-    rootElm,
-  };
+  global.window = dom.window;
+  global.document = window.document;
+  global.navigator = window.navigator;
+  global.React = require('react');
+  global.ReactDOM = require('react-dom');
 
   return {
-    store,
-    history,
     dom,
     rootElm,
   };

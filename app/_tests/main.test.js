@@ -9,11 +9,6 @@ test('001 - MAIN - INTEGRATION', t => {
 
   nock.cleanAll();
   const {dom,rootElm} = utils.startDom();
-  global.window = dom.window;
-  global.document = window.document;
-  global.navigator = window.navigator
-  global.React = require('react');
-  global.ReactDOM = require('react-dom');
   const Main = require('../main').default;
   const appSagas = require('../containers/App/sagas').default;
 
