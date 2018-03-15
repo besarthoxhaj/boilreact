@@ -1,8 +1,4 @@
-/**
- * @flow
- *
- * Global config file.
- */
+// @flow
 
 import { mergeAll } from 'ramda';
 

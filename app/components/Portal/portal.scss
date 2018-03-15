@@ -1,0 +1,16 @@
+.portal {
+
+  &__html,
+  &__body {
+    &--open {
+      overflow: hidden;
+      @include mq($from: desktop) {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  &__overlay {
+    position: relative;
+  }
+}

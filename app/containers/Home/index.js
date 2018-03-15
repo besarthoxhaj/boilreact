@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { createStructuredSelector as createSelector } from 'reselect';
 
-import * as modalActions from '../ModalRouter/actions';
+import c from '../../constants';
 
 class Home extends Component {
 
@@ -62,7 +62,7 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
         search:'entry=77',
         query:{entry:'77'},
       }));
-      dispatch(modalActions.show());
+      dispatch({type:c.MODAL_SHOW});
     },
     goToCounter: () => {
       dispatch(push('/count'));

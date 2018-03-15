@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { Motion, spring } from 'react-motion';
 import { push } from 'react-router-redux';
 
-import * as modalActions from './actions';
-import * as alertActions from '../AlertRouter/actions';
+import c from '../../constants';
 
 class ModalRouter extends Component {
 
@@ -16,10 +15,7 @@ class ModalRouter extends Component {
 
   render() {
     return (
-      <Motion
-        defaultStyle={{x: 0}}
-        style={this.getStyle()}
-      >
+      <Motion defaultStyle={{x: 0}} style={this.getStyle()}>
         {({x}) => {
           return (
             <div
@@ -90,11 +86,10 @@ export const mergeProps = (
     ...stateProps,
     ...ownProps,
     closeModal: () => {
-      dispatch(push({}));
-      dispatch(modalActions.reset());
+      dispatch({type:c.MODAL_DISMISS});
     },
     openAlert: () => {
-      dispatch(alertActions.show());
+      dispatch({type:c.SHOW_ALERT});
     },
   };
 };

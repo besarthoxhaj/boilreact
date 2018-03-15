@@ -9,6 +9,6 @@ export type ModalState = {
 };
 
 export type ModalActions =
-    { type: 'modal/SHOW_MODAL' }
-  | { type: 'modal/RESET_MODAL' }
-  ;
+    { type: 'MODAL_SHOW' }
+  | { type: 'MODAL_DISMISS' }
+;

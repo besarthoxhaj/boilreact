@@ -12,7 +12,7 @@ export default class Main extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <App history={this.props.history} />
+        <App history={this.props.history}/>
       </Provider>
     );
   }

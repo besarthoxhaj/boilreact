@@ -41,6 +41,8 @@ test('002 - HOME - INTEGRATION', t => {
       },
       () => {
         t.comment('APP: unmount Component');
+        st.deepEqual(nock.pendingMocks(),[],'No requests left');
+        st.equal(nock.isDone(),true,'All requests were satisfied');
         ReactDOM.unmountComponentAtNode(rootElm);
         t.end();
       }

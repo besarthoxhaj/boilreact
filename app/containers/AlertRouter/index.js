@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Motion, spring } from 'react-motion';
 
-import * as alertActions from './actions';
+import c from '../../constants';
 
 class AlertRouter extends Component {
 
@@ -80,7 +80,7 @@ export const mergeProps = (
     ...stateProps,
     ...ownProps,
     closeAlert: () => {
-      dispatch(alertActions.reset());
+      dispatch({type:c.RESET_ALERT});
     }
   };
 };

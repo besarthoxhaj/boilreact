@@ -16,12 +16,12 @@ export default function (
   action:ModalActions
 ):ModalState {
   switch (action.type) {
-    case c.SHOW_MODAL:
+    case c.MODAL_SHOW:
       return {
         ...state,
         isVisible: true,
       };
-    case c.RESET_MODAL:
+    case c.MODAL_DISMISS:
       return {
         ...initialState,
       };

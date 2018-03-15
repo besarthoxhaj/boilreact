@@ -26,8 +26,8 @@ window = {
 require(`./_bootstrap`);
 
 /* INTEGRATION */
-require(`${BASE_PATH}/_tests/main.test.js`);
-require(`${BASE_PATH}/_tests/home.test.js`);
+require(`${BASE_PATH}/_tests/01.main.test.js`);
+require(`${BASE_PATH}/_tests/02.home.test.js`);
 
 /* UNIT */
 require(`${BASE_PATH}/utils/_tests/index.test.js`);
