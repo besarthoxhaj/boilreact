@@ -10,6 +10,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  mode: 'development',
   entry: [
     'react-hot-loader/patch',
     // activate HMR for React

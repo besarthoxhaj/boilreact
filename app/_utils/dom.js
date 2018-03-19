@@ -1,4 +1,3 @@
-import cheerio from 'cheerio';
 import { readFileSync } from 'fs';
 import path from 'path';
 import nodeSass from 'node-sass';

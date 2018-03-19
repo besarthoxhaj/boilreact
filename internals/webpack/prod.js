@@ -4,6 +4,8 @@ var cheerio = require('cheerio');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
+
   entry: [
     'whatwg-fetch',
     './app/index.js'

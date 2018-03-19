@@ -1,6 +1,5 @@
 'use strict';
 
-const handlers = require('./handlers.js');
 const path = require('path');
 const data = require('../data');
 
@@ -39,8 +38,8 @@ module.exports = [
     config: {
       auth: 'simple'
     },
-    handler: (req, res) => {
-      return res(data['GET']);
+    handler: (req, h) => {
+      return data['GET'];
     }
   },
 ];
