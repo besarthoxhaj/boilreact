@@ -9,7 +9,7 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { searchValue: '' };
+    this.state = { searchValue: props.searchTerm || ''};
     this.updateSearch = this.updateSearch.bind(this);
     this.sendSearch = this.sendSearch.bind(this);
   };
@@ -49,7 +49,9 @@ class Home extends Component {
   };
 }
 
-export const mapStateToProps = createSelector({});
+export const mapStateToProps = createSelector({
+
+});
 
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
@@ -59,8 +61,8 @@ export const mergeProps = (stateProps, dispatchProps, ownProps) => {
     openModal: () => {
       dispatch(push({
         pathname: '/',
-        search:'entry=77',
-        query:{entry:'77'},
+        search: 'entry=77',
+        query: { entry: '77' },
       }));
       dispatch({type:c.MODAL_SHOW});
     },

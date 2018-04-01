@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Children } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -8,6 +9,15 @@ import PageRouter from '../PageRouter';
 import ModalRouter from '../ModalRouter';
 import AlertRouter from '../AlertRouter';
 import config from '../../config';
+
+const DivBody = styled.div`
+  position: 'absolute';
+  z-index: 1;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+`;
 
 export class AppComp extends React.Component {
 
@@ -20,24 +30,13 @@ export class AppComp extends React.Component {
       <div>
         <AlertRouter />
         <ModalRouter />
-        <div style={this.getStyle()}>
+        <DivBody>
           <Header />
           <PageRouter history={this.props.history} />
           <Footer />
-        </div>
+        </DivBody>
       </div>
     );
-  };
-
-  getStyle() {
-    return {
-      position:'absolute',
-      zIndex:1,
-      bottom:0,
-      top:0,
-      right:0,
-      left:0,
-    };
   };
 }
 

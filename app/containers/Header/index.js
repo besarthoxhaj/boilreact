@@ -12,7 +12,7 @@ class HeaderComp extends React.PureComponent {
   };
   getStyle() {
     return {
-      backgroundColor:'red',
+      backgroundColor: 'red',
     };
   };
 }

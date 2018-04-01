@@ -7,7 +7,9 @@ require('isomorphic-fetch');
 
 require('babel-core/register')({presets:['es2015'],plugins:[
   'transform-object-rest-spread',
-  'transform-flow-strip-types'
+  'transform-flow-strip-types',
+  'transform-decorators-legacy',
+  'transform-class-properties'
 ]});
 
 const BASE_PATH = '../app';

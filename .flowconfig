@@ -1,5 +1,5 @@
 [version]
-0.44.1
+0.69.0
 
 [ignore]
 .*/build/.*
@@ -10,6 +10,7 @@
 # Local modules who had some conflicts with Flow
 .*/node_modules/nock/*
 .*/node_modules/config-chain/*
+.*/node_modules/webpack-cli/*
 
 [options]
 # Provides an escape hatch to suppress flow type errors.

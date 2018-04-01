@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -12,7 +13,7 @@ type Props = {
   className: string,
 };
 
-export default class Modal extends React.Component {
+export default class Portal extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,7 +36,6 @@ export default class Modal extends React.Component {
 
     if(!this.props.node && !this.defaultNode) {
       this.defaultNode = document.createElement('div');
-      this.defaultNode.id = 'passpicker';
       this.defaultNode.className = this.props.className || 'portal__overlay';
       document.body.appendChild(this.defaultNode);
     }

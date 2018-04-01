@@ -18,15 +18,11 @@ module.exports = {
   },
 
   module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        use: [
-          'babel-loader'
-        ],
-        exclude: /node_modules/
-      },
-    ]
+    rules: [{
+      test: /\.js?$/,
+      use: [ 'babel-loader' ],
+      exclude: /node_modules/
+    }]
   },
 
   plugins: [
@@ -49,15 +45,10 @@ module.exports = {
 
 function templateContent() {
 
-  const svgSymbols = require('fs').readFileSync(
-    require('path').resolve(process.cwd(), 'assets/svg-symbols.html')
-  ).toString();
-
   const html = [
     '<!doctype html>',
     '<html>',
     '  <head>',
-    '    <link href="/main.css" rel="stylesheet">',
     '  </head>',
     '  <body>',
     '    <div id="root"></div>',
@@ -68,6 +59,5 @@ function templateContent() {
   const doc = cheerio(html);
   const head = doc.find('head');
   const body = doc.find('body');
-  body.prepend(`<div class="[ u-hidden ]">${svgSymbols}</div>`);
   return doc.toString();
 }
