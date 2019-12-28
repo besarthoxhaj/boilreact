@@ -1,4 +1,5 @@
 import React from 'react';
+import GlobalStyle from './components/GlobalStyle';
 import Button from './components/Button';
 import Modal from './components/Modal';
 
@@ -14,6 +15,7 @@ export default function App(props) {
 
   return (
     <React.Fragment>
+      <GlobalStyle />
       <Button onClick={() => setModal(true)}>
         Open Modal
       </Button>
